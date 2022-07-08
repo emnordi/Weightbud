@@ -1,46 +1,38 @@
-import React, { useMemo, useState } from 'react';
-import './App.css';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Home from './pages/Home';
-import { CssBaseline, Switch, useMediaQuery } from '@mui/material';
+import React, { useMemo, useState } from 'react'
+import './App.css'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import Home from './pages/Home'
+import { CssBaseline, Switch, useMediaQuery } from '@mui/material'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
+import AddWeight from './pages/AddWeight'
 
 function App() {
-  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
-  const [darkMode, setDarkMode] = useState(prefersDarkMode);
-  const themeString = (b: boolean) => (b ? "dark" : "light");
+  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)')
+  const themeString = (b: boolean) => (b ? 'dark' : 'light')
 
   const theme = useMemo(
     () =>
-    createTheme({
+      createTheme({
         palette: {
-          mode: themeString(darkMode)
-        }
+          mode: themeString(prefersDarkMode),
+        },
       }),
-    [darkMode]
-  );
-
-  const handleSwitch = (_e: any, checked: boolean) => {
-    setDarkMode(checked);
-    console.log(darkMode);
-  };
+    [prefersDarkMode],
+  )
 
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-    <div className="App">
-      <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home text="Hello"/>}/>
-        <Route path="/ben" element={<Home text="BEN!"/>}/>
-      </Routes>
-      </BrowserRouter>
-      <Switch
-            onChange={handleSwitch}
-          />
-    </div>
+      <div className="App">
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Home text="Hello" />} />
+            <Route path="/weight" element={<AddWeight />} />
+          </Routes>
+        </BrowserRouter>
+      </div>
     </ThemeProvider>
-  );
+  )
 }
 
-export default App;
+export default App
