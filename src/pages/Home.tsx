@@ -9,7 +9,7 @@ const Home = ({ text }: Props) => {
     <div>
       <Grid container spacing={2}>
         <Grid item xs={12}>
-          <h1>Welcome to Weightbud, bud!</h1>
+          <h1>Welcome to WeighTrackr, bud!</h1>
         </Grid>
         <Grid item xs={4}>
           <p>xs=4</p>
