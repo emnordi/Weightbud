@@ -17,9 +17,10 @@ import GetExcercisesFromMg from './Exercises/excercises'
 
 interface Props {
   setExcercise: any
+  setInputExcercise: any
 }
 
-const PopupSelector = ({ setExcercise }: Props) => {
+const PopupSelector = ({ setExcercise, setInputExcercise }: Props) => {
   const [open, setOpen] = useState(false)
   const [muscleGroup, setMuscleGroup] = useState<string>('')
   const [tempExcersize, setTempExcercise] = useState('')
@@ -42,6 +43,7 @@ const PopupSelector = ({ setExcercise }: Props) => {
   ) => {
     if (reason !== 'backdropClick') {
       setExcercise(tempExcersize)
+      setInputExcercise(tempExcersize)
       setOpen(false)
     }
   }

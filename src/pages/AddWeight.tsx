@@ -1,4 +1,5 @@
 import {
+  Autocomplete,
   Box,
   Button,
   Grid,
@@ -10,9 +11,11 @@ import { LocalizationProvider, MobileDatePicker } from '@mui/x-date-pickers'
 import { ChangeEvent, useState } from 'react'
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
 import PopupSelector from '../components/PopupSelector/PopupSelector'
+import { excercises } from '../components/PopupSelector/Exercises/excercises'
 
 const AddWeight = () => {
   const [excercise, setExcercise] = useState('')
+  const [inputExcercise, setInputExcercise] = useState('')
   const [value, setValue] = useState<Date | null>(new Date())
   const [weight, setWeight] = useState(0)
 
@@ -21,8 +24,11 @@ const AddWeight = () => {
   }
   const handleChange2 = (event: ChangeEvent<HTMLInputElement>) => {
     setWeight(parseInt(event.target.value))
-    console.log(weight)
   }
+  const handleChange3 = (event: ChangeEvent<HTMLInputElement>) => {
+    setExcercise(event.target.value)
+  }
+
   return (
     <Grid container spacing={1}>
       <Grid item xs={12}>
@@ -40,10 +46,28 @@ const AddWeight = () => {
         </LocalizationProvider>
       </Grid>
       <Grid item xs={6}>
-        <TextField label="Exercise" value={excercise} />
+        <Autocomplete
+          options={excercises.map((col) => {
+            return col.name
+          })}
+          value={excercise}
+          inputValue={inputExcercise}
+          onChange={(event, newValue) => {
+            setExcercise(newValue!)
+          }}
+          onInputChange={(event, newInputValue) => {
+            setInputExcercise(newInputValue)
+          }}
+          sx={{ width: 200 }}
+          isOptionEqualToValue={(option, value) => true}
+          renderInput={(params) => <TextField {...params} label="Exercise" />}
+        />
       </Grid>
       <Grid item xs={6}>
-        <PopupSelector setExcercise={setExcercise} />
+        <PopupSelector
+          setExcercise={setExcercise}
+          setInputExcercise={setInputExcercise}
+        />
       </Grid>
       <Grid item xs={6}>
         <TextField
@@ -59,7 +83,7 @@ const AddWeight = () => {
       <Grid item xs={6}>
         <Button
           onClick={() => {
-            alert(weight)
+            alert(excercise)
           }}
         >
           Add
