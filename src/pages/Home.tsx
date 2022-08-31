@@ -1,10 +1,12 @@
 import { Grid } from '@mui/material'
+import { getWeightlogs } from '../service/WeightLogService'
 
 interface Props {
   text: string
 }
 
 const Home = ({ text }: Props) => {
+  console.log(getWeightlogs())
   return (
     <div>
       <Grid container spacing={2}>

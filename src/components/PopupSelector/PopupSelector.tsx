@@ -13,7 +13,7 @@ import {
   SelectChangeEvent,
 } from '@mui/material'
 import { useState } from 'react'
-import GetExcercisesFromMg from './Exercises/excercises'
+import GetExcercisesFromMg, { muscleGroups } from './Exercises/excercises'
 
 interface Props {
   setExcercise: any
@@ -63,10 +63,9 @@ const PopupSelector = ({ setExcercise, setInputExcercise }: Props) => {
                   <OutlinedInput label="muscle group" id="demo-dialog-native" />
                 }
               >
-                <option aria-label="None" value="" />
-                <option value="abs">Abs</option>
-                <option value="back">Back</option>
-                <option value="chest">Chest</option>
+                {muscleGroups.map((mg) => {
+                  return <option value={mg}>{mg}</option>
+                })}
               </Select>
             </FormControl>
             <FormControl sx={{ m: 1, minWidth: 120 }}>
