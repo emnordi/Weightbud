@@ -6,7 +6,6 @@ interface Props {
 }
 
 const Home = ({ text }: Props) => {
-  console.log(getWeightlogs())
   return (
     <div>
       <Grid container spacing={2}>

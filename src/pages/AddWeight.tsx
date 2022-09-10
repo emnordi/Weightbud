@@ -13,23 +13,17 @@ import { ChangeEvent, useState } from 'react'
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
 import PopupSelector from '../components/PopupSelector/PopupSelector'
 import { excercises } from '../components/PopupSelector/Exercises/excercises'
+import { addWeightLog } from '../service/WeightLogService'
 
 const AddWeight = () => {
   const [excercise, setExcercise] = useState('')
   const [inputExcercise, setInputExcercise] = useState('')
-  const [value, setValue] = useState<Date | null>(new Date())
+  const [curdate, setCurdate] = useState<Date>(new Date())
   const [weight, setWeight] = useState<number>(0)
   const [reps, setReps] = useState<number>()
 
   const handleChange = (newValue: Date | null) => {
-    setValue(newValue)
-  }
-
-  const handleChange2 = (event: ChangeEvent<HTMLInputElement>) => {
-    setWeight(parseInt(event.target.value))
-  }
-  const handleChange3 = (event: ChangeEvent<HTMLInputElement>) => {
-    setReps(parseInt(event.target.value))
+    setCurdate(newValue ? newValue : new Date())
   }
 
   const handleChangeGeneral = (event: any, setState: any) => {
@@ -43,8 +37,8 @@ const AddWeight = () => {
         <LocalizationProvider dateAdapter={AdapterDateFns}>
           <MobileDatePicker
             label="Exercise date"
-            inputFormat="dd/MM/yyyy"
-            value={value}
+            inputFormat="yyyy-MM-dd"
+            value={curdate}
             onChange={handleChange}
             renderInput={(params) => (
               <TextField {...params} sx={{ width: 1 / 3 }} />
@@ -70,7 +64,7 @@ const AddWeight = () => {
             onInputChange={(event, newInputValue) => {
               setInputExcercise(newInputValue)
             }}
-            sx={{ width: 200 }}
+            sx={{ width: 235, marginLeft: -9 }}
             isOptionEqualToValue={(option, value) => true}
             renderInput={(params) => <TextField {...params} label="Exercise" />}
           />
@@ -103,7 +97,13 @@ const AddWeight = () => {
         </Stack>
         <Button
           onClick={() => {
-            alert(excercise + ', ' + weight + ', ' + reps)
+            addWeightLog({
+              user_id: '1',
+              exercise: excercise,
+              weight: weight,
+              reps: reps,
+              reg_date: curdate,
+            })
           }}
         >
           Add

@@ -5,11 +5,12 @@ import Home from './pages/Home'
 import { CssBaseline, Switch, useMediaQuery } from '@mui/material'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import AddWeight from './pages/AddWeight'
+import Overview from './pages/Overview'
 
 function App() {
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)')
   const themeString = (b: boolean) => (b ? 'dark' : 'light')
-
+  const isMobileMatch = useMediaQuery('(max-width:600px)')
   const theme = useMemo(
     () =>
       createTheme({
@@ -26,7 +27,7 @@ function App() {
       <div className="App">
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Home text="Hello" />} />
+            <Route path="/" element={<Overview />} />
             <Route path="/weight" element={<AddWeight />} />
           </Routes>
         </BrowserRouter>

@@ -21,7 +21,6 @@ export const excercises: Exercise[] = [
   //Legs
   { name: 'Squats', mg: ['legs'] },
   { name: 'Lunges', mg: ['legs'] },
-  //Shoulders
 ]
 
 interface Props {
